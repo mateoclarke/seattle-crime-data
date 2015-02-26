@@ -11,5 +11,9 @@
     "url": "?.git"
   },
   "author": "Mateo Clarke",
-  "license": "BSD"
+  "license": "BSD",
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-util": "~3.0.4"
+  }
 }
