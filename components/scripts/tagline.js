@@ -1,9 +1,11 @@
-var $, fill;
+var $ = require('jquery');
 
-$ = require('jquery');
 
-(fill = function(item) {
-  return $('.tagline').append("" + item);
-})('Playing with crime data in Seattle');
+var tagline = 'Playing with crime data in Seattle';
 
-fill;
+(function taglineFill (item){
+	return $('.tagline').prepend(item);
+})(tagline);
+
+
+

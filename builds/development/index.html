@@ -4,7 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Socrata - 24 Hour Code Challenge</title>
-        <!-- Latest compiled and minified CSS -->
+        <!-- CSS from Vendors & compiled Sass -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/style.css">
         <style type="text/css">
@@ -17,11 +18,31 @@
     </style>
     </head>
 <body>
-    <h1>Socrata Code Challenge</h1>
-	<h2 class="tagline"></h2>
+    <div class="container">
+        <h1>Socrata Code Challenge</h1>
+        <h2 class="tagline">
+            <a href="https://data.seattle.gov/resource/3k2p-39jp.json">(Data Source)</a>
+            <!-- https://data.seattle.gov/resource/3k2p-39jp.json$where=within_circle(location, 47.595206, -122.331639, 1609.34)&$where= -->
+        </h2>
+    </div>
 
-	<!-- SEATTLE CRIME DATA ENDPOINT -->
-	<a href="https://data.seattle.gov/resource/3k2p-39jp.json">Seattle Crime Data Endpoint</a>
+    <div class="container">
+        <p>We want to explore what the Seattle crime data looks like and what stories it tells. Let's looks specifically at the data as it relates to CenturyLink field.</p>
+    </div>
+    <div class="container">
+        <div id="map" class="map"></div>
+        <div class="data-display">
+            <h2>Crimes Today</h2>
+        </div>
+    </div>
 
+
+
+    
+    <!--JAVASCRIPT LIBRARIES & SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
