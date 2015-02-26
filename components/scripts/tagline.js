@@ -1,4 +1,6 @@
-var fill;
+var $, fill;
+
+$ = req('jquery');
 
 (fill = function(item) {
   return $('.tagline').append("" + item);
