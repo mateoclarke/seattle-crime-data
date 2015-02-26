@@ -37,6 +37,4 @@ gulp.task('compass', function(){
 });
 
 
-gulp.task('default', function() {
-  // place code for your default task here
-});
+gulp.task('default', ['coffee','js','compass']);
