@@ -59,7 +59,33 @@ function CrimeDataMap(attributes){
 	}
 
 	// 
-	
+	//
+	$('button.crime-data-trigger').on('click', function () {
+
+	    var datasetUrl = "https://data.seattle.gov/resource/3k2p-39jp.json";
+	    var whereInCircle = "?$where=within_circle(incident_location, "+centuryLinkCoords[0]+", "+ centuryLinkCoords[1]+", "+metersInAMile+")";
+	    var dataWithinMile = datasetUrl + whereInCircle;
+	    var dateRange = " and event_clearance_date>'2015-02-26T00:00:00'";
+	    var dataWithinMileAndDate = datasetUrl + whereInCircle + dateRange;
+	    // var eventClearanceGroup = "BIKE";
+	    // var eventDescr = '%20and%20=event_clearance_group='+eventClearanceGroup;
+	    var url = dataWithinMileAndDate;
+
+		console.log('GET', url);
+
+		$.ajax({
+			method: 'GET',
+			url: url,
+		}).done(function(data, status) {
+			console.log('done with call:', status, data);
+			for (var i = data.length - 1; i >= 0; i--) {
+				var marker = L.marker([data[i].latitude, data[i].longitude]).addTo(map)
+			};
+		}).fail(function(xhr, status, err) {
+			console.error('fail', status, err);
+		});
+	});
+
 
 
 	
