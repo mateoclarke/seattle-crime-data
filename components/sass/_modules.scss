@@ -15,11 +15,24 @@
   background: $black;
   float: right;
   padding: 10px;
+  &.show-mobile {
+    display: none;
+    @media screen and (max-width: $break) {
+      display: block;
+      height: auto;
+    }
+  } // .data-display.show-mobile
   @media screen and (max-width: $break) {
     width: 100%;
+    height: auto; 
   } // .data-display media-query
   .crime-data-header {
     margin-bottom: 5px;
+    &.hide-mobile {
+      @media screen and (max-width: $break) {
+        display: none;
+      }
+    } // .crime-data-header.hide-mobile
   } // .crime-data-header
   .incident-type-count-0 {
     text-transform: capitalize;

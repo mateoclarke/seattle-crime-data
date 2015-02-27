@@ -149,13 +149,28 @@ section {
   float: right;
   padding: 10px;
 }
+.data-display.show-mobile {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .data-display.show-mobile {
+    display: block;
+    height: auto;
+  }
+}
 @media screen and (max-width: 767px) {
   .data-display {
     width: 100%;
+    height: auto;
   }
 }
 .data-display .crime-data-header {
   margin-bottom: 5px;
+}
+@media screen and (max-width: 767px) {
+  .data-display .crime-data-header.hide-mobile {
+    display: none;
+  }
 }
 .data-display .incident-type-count-0, .data-display .incident-type-count-1 {
   text-transform: capitalize;
