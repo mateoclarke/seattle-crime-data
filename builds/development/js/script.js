@@ -78,7 +78,7 @@ function CrimeDataMap(attributes){
 
 	var car = L.MakiMarkers.icon({
 	    icon: "car",
-	    color: blue,
+	    color: orange,
 	    size: "l"
 	});
 
