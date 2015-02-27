@@ -18,18 +18,31 @@
     </div>
 
     <div class="container">
-        <p>We want to explore what the Seattle crime data looks like and what stories it tells. Let's looks specifically at the data as it relates to CenturyLink field.</p>
+        <p>Let's explore what the crime dataset tells us about <a href="http://en.wikipedia.org/wiki/Hooliganism">hooliganism</a> in Seattle by looking specifically at the data points closest to CenturyLink field on matchdays vs more recent dates.</p>
     </div>
     <div class="container">
         <div class="view-options">
-            <button>Last Seahawks Home Game</button>
-            <button>Last Sounders Home Game</button>
-            <button>Yesterday</button>
-            <button>Today</button>
+            <button class="btn" id="trigger-seahawks">
+                <img src="images/seahawks.png">
+                <p>Last Seahawks Home Game</p>
+            </button>
+            <button class="btn" id="trigger-sounders">
+                <img src="images/sounders.png">
+                <p>Last Sounders Home Game</p>
+            </button>
+            <button class="btn" id="trigger-yesterday">
+                <img src="images/history.svg">
+                <p>Yesterday</p>
+            </button>
+            <button class="btn" id="trigger-today">
+                <img src="images/clock.svg">
+                <p>Today</p>
+            </button>
         </div>
         <div id="map" class="map"></div>
         <div class="data-display">
-            <h2 class="crime-today"><span id="crime-count"></span>Police 911 Incidents <span id="date-view">Today</span></h2>
+            <h2 class="crime-data-header"><span id="crime-count"></span>Police Responses <span id="crime-date-view">Today</span></h2>
+            <div class="data-list"></div>
         </div>
     </div>
 
@@ -39,6 +52,7 @@
     <!--JAVASCRIPT LIBRARIES & SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/vendor/moment.js"></script>
 
     <script src="js/script.js"></script>
 </body>
