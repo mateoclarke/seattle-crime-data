@@ -254,10 +254,11 @@ function CrimeDataMap(attributes){
 		$('.data-list').html("");
 		// Add crime types to data list, first clearing data
     	for (var i = 0; i < sortedCrimeCount.length; i++){
-		    if (sortedCrimeCount[i][1] > 1) {
+		    if (sortedCrimeCount[i][1]) {
 		    	$('.data-list').append("<p class='incident-type-count-"+((i%2))+"'>"+sortedCrimeCount[i][0].toLowerCase()+": <span class='crime-count-type'>"+ sortedCrimeCount[i][1]+"</span></p>");
 		    }
     	}
+    	console.log(sortedCrimeCount);
 	}
 
 	// AJAX Request of Data

@@ -11,7 +11,7 @@
 
 .data-display {
   width: 40%;
-  height: $map-height; 
+  min-height: $map-height; 
   background: $black;
   float: right;
   padding: 10px;
