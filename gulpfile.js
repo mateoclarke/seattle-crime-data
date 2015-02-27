@@ -4,7 +4,8 @@ var gulp = require('gulp'),
 	compass = require('gulp-compass'),
 	connect = require('gulp-connect'),
 	bower = require('gulp-bower'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat'),
+	deploy = require('gulp-gh-pages');
 
 var jsSources = [
 	'components/scripts/tagline.js', 
@@ -57,6 +58,11 @@ gulp.task('html', function(){
 gulp.task('json', function(){
 	gulp.src(jsonSources)
 		.pipe(connect.reload())
+});
+
+gulp.task('deploy', function () {
+    return gulp.src('./builds/development/**/*')
+        .pipe(deploy());
 });
 
 
