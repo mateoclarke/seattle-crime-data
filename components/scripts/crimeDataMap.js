@@ -7,7 +7,7 @@ function CrimeDataMap(attributes){
 	// our Leaflet Map
 	var map = L.map('map', {
 		center: centuryLinkCoords,
-		zoom: 13,
+		zoom: 14,
 		scrollWheelZoom: false
 	})
 
@@ -31,7 +31,7 @@ function CrimeDataMap(attributes){
 	// Create a one mile circle centered on CLF
 	function drawOneMileCircle(meters){
 
-		L.circle(centuryLinkCoords, meters, {color: "red", fillColor: "#f03"})
+		L.circle(centuryLinkCoords, meters, {color: "red", fillColor: "#FFEEBE"})
 		    .bindPopup("My radius is " + meters + " meters!").addTo(map);
 
 	}
