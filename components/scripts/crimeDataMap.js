@@ -3,7 +3,6 @@ var centuryLinkCoords = [47.595206, -122.331639];
 
 function CrimeDataMap(attributes){
 
-	// *****
 	// our Leaflet Map
 	var map = L.map('map', {
 		center: centuryLinkCoords,
@@ -13,6 +12,9 @@ function CrimeDataMap(attributes){
 
 	//  add tile Layer from Mapquest
 	L.tileLayer(
+	    // Mapbox Streets-Satellite
+	    'http://api.tiles.mapbox.com/v4/mapbox.streets-satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0ZW9jb2RlcyIsImEiOiJUZVVZSVBvIn0.PkZleldXk_6KCuoGhx6-CA'
+
 		// Satelite Tile
 		// 'http://otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg'
 
@@ -21,17 +23,12 @@ function CrimeDataMap(attributes){
 
 		// Open Street Map Tile
 	    // 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-
-	    // Mapbox Streets-Satellite
-	    'http://api.tiles.mapbox.com/v4/mapbox.streets-satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF0ZW9jb2RlcyIsImEiOiJUZVVZSVBvIn0.PkZleldXk_6KCuoGhx6-CA'
-
 	).addTo(map);
 
 	// Set up Marker Layer
 	var markers = new L.layerGroup();
 
-	// *****
-	// Create a one mile circle centered on CenturyLink
+	// Creates a one mile circle centered on CenturyLink
 	function drawOneMileCircle(meters){
 
 		L.circle(centuryLinkCoords, meters, {color: "red", fillColor: "#FFEEBE"})
@@ -42,21 +39,170 @@ function CrimeDataMap(attributes){
 	var metersInAMile = 1609.34;
 	var circle = new drawOneMileCircle(metersInAMile);
 
+	// Create variables for special marker icons
+	// Colors for markers
+	var red = '#d53e4f';
+	var orange = '#f46d43';
+	var ltOrange = '#fdae61';
+	var yellow = '#fee08b';
+	var ltYellow = '#ffffbf';
+	var ltGreen = '#e6f598';
+	var green = '#abdda4';
+	var teal =	'#66c2a5';
+	var blue =  '#3F84FF';
+
+	var boozeIcon = L.MakiMarkers.icon({
+	    icon: "alcohol-shop",
+	    color: green,
+	    size: "l"
+	});	
+
+	var traffic = L.MakiMarkers.icon({
+	    icon: "bus",
+	    color: blue,
+	    size: "l"
+	});
+
+	var car = L.MakiMarkers.icon({
+	    icon: "car",
+	    color: blue,
+	    size: "l"
+	});
+
+	var parking = L.MakiMarkers.icon({
+	    icon: "parking",
+	    color: blue,
+	    size: "l"
+	});
+
+	var narcotics = L.MakiMarkers.icon({
+	    icon: "pharmacy",
+	    color: green,
+	    size: "l"
+	});
+
+	var theft = L.MakiMarkers.icon({
+	    icon: "shop",
+	    color: ltOrange,
+	    size: "l"
+	});
+
+	var hazards = L.MakiMarkers.icon({
+	    icon: "danger",
+	    color: orange,
+	    size: "l"
+	});
+
+	var suspicious = L.MakiMarkers.icon({
+	    icon: "pitch",
+	    color: ltYellow,
+	    size: "l"
+	});
+
+	var disturb = L.MakiMarkers.icon({
+	    icon: "school",
+	    color: yellow,
+	    size: "l"
+	});
+
+	var assault = L.MakiMarkers.icon({
+	    icon: "police",
+	    color: red,
+	    size: "l"
+	});
+
+	var property = L.MakiMarkers.icon({
+	    icon: "commercial",
+	    color: ltOrange,
+	    size: "l"
+	});
+
+	var mental = L.MakiMarkers.icon({
+	    icon: "hospital",
+	    color: green,
+	    size: "l"
+	});
+
 	// Plot Crime Data with Leaflet Markers
 	function plotCrimeDataOnMap(data){
 		for (var i = data.length - 1; i >= 0; i--) {
-			var marker = L.marker([data[i].latitude, data[i].longitude])
-						.bindPopup(data[i].event_clearance_subgroup);
-			markers.addLayer(marker);
+			if (data[i].event_clearance_subgroup == "LIQUOR VIOLATIONS"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: boozeIcon})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} else if (data[i].event_clearance_subgroup == "TRAFFIC RELATED CALLS"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: traffic})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} else if (data[i].event_clearance_subgroup == "CAR PROWL"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: car})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} else if (data[i].event_clearance_subgroup == "PARKING VIOLATIONS"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: parking})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} else if (data[i].event_clearance_subgroup == "NARCOTICS COMPLAINTS"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: narcotics})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			}  else if (data[i].event_clearance_subgroup == "HAZARDS"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: hazards})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			}  else if (data[i].event_clearance_subgroup == "SUSPICIOUS CIRCUMSTANCES"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: suspicious})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			}  else if (data[i].event_clearance_subgroup == "COMMERCIAL BURGLARIES" ||
+						data[i].event_clearance_subgroup == "ROBBERY" ||
+						data[i].event_clearance_subgroup == "AUTO THEFTS" ||
+						data[i].event_clearance_subgroup == "BURGLARY ALARMS (FALSE)" ||
+						data[i].event_clearance_subgroup == "THEFT" ){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: theft})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			}   else if (data[i].event_clearance_subgroup == "ASSAULTS" || 
+						data[i].event_clearance_subgroup == "WARRANT CALLS" ||
+						data[i].event_clearance_subgroup == "CASUALTIES" ){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: assault})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} 	else if (data[i].event_clearance_subgroup == "MENTAL CALL"){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: mental})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} 	else if (data[i].event_clearance_subgroup == "DISTURBANCES" ||
+						data[i].event_clearance_subgroup == "TRESPASS"||
+						data[i].event_clearance_subgroup == "MISCELLANEOUS MISDEMEANORS"||
+						data[i].event_clearance_subgroup == "NUISANCE, MISCHIEF COMPLAINTS" ){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: disturb})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} 	else if (data[i].event_clearance_subgroup == "PROPERTY DAMAGE" ||
+						data[i].event_clearance_subgroup == "PROPERTY - MISSING, FOUND" ){
+				var marker = L.marker([data[i].latitude, data[i].longitude], 
+							{icon: disturb})
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			} else {
+				var marker = L.marker([data[i].latitude, data[i].longitude])
+							.bindPopup(data[i].event_clearance_subgroup);
+				markers.addLayer(marker);
+			}
 		};
 		map.addLayer(markers);
-	}
-
-	// Count & Update Total Crime Incidents in Request
-	function countTotalCrimes(data){
-		var countCrimes = data.length;
-		$('span#crime-count').text(countCrimes + " ");
-		countCrimeTypes(data);
 	}
 
 	// Sort Object by converting to array
@@ -75,7 +221,15 @@ function CrimeDataMap(attributes){
 	    return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
 	}
 
-	// Count Crimes by Type
+	// Count & Update Total Crime Incidents in Request
+	function countTotalCrimes(data){
+		var countCrimes = data.length;
+		$('span.crime-count').text(countCrimes + " ");
+		countCrimeTypes(data);
+	}
+
+
+	// Count & Display Crimes by Type
 	function countCrimeTypes(data){
 		var crimeCount = {};
 		for (var i = data.length - 1; i >= 0; i--) {
@@ -130,10 +284,10 @@ function CrimeDataMap(attributes){
 		// Make AJAX Call passing in URL
 		ajaxDataRequest(url);
 		// Update data panel day in title
-		$('#crime-date-view').text(semanticDay);
+		$('.crime-date-view').text(semanticDay);
 	}
 
-	// IIFE because default display is Yesterday
+	//default display is Yesterday
 	function requestDataForYesterday(){
 		// Using Moment js library to create start and end dates for Today
 		var yesterday = moment().subtract(1, 'days');
