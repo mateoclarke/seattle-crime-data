@@ -19,10 +19,9 @@
     </head>
 <body>
     <div class="container">
-        <h1>Socrata Code Challenge</h1>
+        <h1>Seattle Police <br>911 Incident Response Data<br> within one mile of CenturyLink</h1>
         <h2 class="tagline">
-            <a href="https://data.seattle.gov/resource/3k2p-39jp.json">(Data Source)</a>
-            <!-- https://data.seattle.gov/resource/3k2p-39jp.json$where=within_circle(location, 47.595206, -122.331639, 1609.34)&$where= -->
+            <a href="https://data.seattle.gov/Public-Safety/Seattle-Police-Department-911-Incident-Response/3k2p-39jp">(View Data in Socrata)</a>
         </h2>
     </div>
 
@@ -30,10 +29,15 @@
         <p>We want to explore what the Seattle crime data looks like and what stories it tells. Let's looks specifically at the data as it relates to CenturyLink field.</p>
     </div>
     <div class="container">
+        <div class="view-options">
+            <button>Last Seahawks Home Game</button>
+            <button>Last Sounders Home Game</button>
+            <button>Yesterday</button>
+            <button>Today</button>
+        </div>
         <div id="map" class="map"></div>
         <div class="data-display">
-            <h2>Crimes Today</h2>
-            <button class="crime-data-trigger">Get Data</button>
+            <h2 class="crime-today"><span id="crime-count"></span>Police 911 Incidents <span id="date-view">Today</span></h2>
         </div>
     </div>
 
