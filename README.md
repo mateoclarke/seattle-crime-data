@@ -1,5 +1,8 @@
 #Playing with Seattle Crime Data
-## Socrata - 24 Hour Coding Challenge
+
+## (View Live)[http://mateoclarke.github.io/seattle-crime-data/]
+
+A 24 Hour Coding Challenge from Socrata
 
 This project is a 24 hour coding challenge playing with the City of Seattle Crime Dataset via the Socrata SODA API. 
 
