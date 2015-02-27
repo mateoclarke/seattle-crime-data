@@ -1,6 +1,7 @@
-#Playing with Seattle Crime Data => [View Live](http://mateoclarke.github.io/seattle-crime-data/])
+#Playing with Seattle Crime Data
+#[View Live](http://mateoclarke.github.io/seattle-crime-data/)
 
-A 24 Hour Coding Challenge from Socrata
+Visualization of Seattle Police 911 Incident Response Data within one mile of CenturyLink
 
 This project is a 24 hour coding challenge playing with the City of Seattle Crime Dataset via the Socrata SODA API. 
 
