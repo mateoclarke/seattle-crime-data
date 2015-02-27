@@ -1,4 +1,5 @@
-# Socrata - 24 Hour Coding Challenge
+#Playing with Seattle Crime Data
+## Socrata - 24 Hour Coding Challenge
 
 This project is a 24 hour coding challenge playing with the City of Seattle Crime Dataset via the Socrata SODA API. 
 
