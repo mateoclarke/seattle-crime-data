@@ -94,6 +94,7 @@ h1 {
 h2 {
   font-size: 1.5em;
   color: #F42534;
+  margin: 0 0 5px;
 }
 
 p {
@@ -135,7 +136,7 @@ section {
   height: 500px;
   float: left;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   .map {
     width: 100%;
   }
@@ -148,7 +149,7 @@ section {
   float: right;
   padding: 10px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
   .data-display {
     width: 100%;
   }
@@ -186,6 +187,17 @@ section {
   font-size: .7em;
   margin: 0;
 }
+@media screen and (max-width: 767px) {
+  .view-options button p {
+    display: none;
+  }
+}
 .view-options img {
   max-height: 60px;
+}
+@media screen and (max-width: 767px) {
+  .view-options img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

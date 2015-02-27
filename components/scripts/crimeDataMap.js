@@ -133,13 +133,15 @@ function CrimeDataMap(attributes){
 		$('#crime-date-view').text(semanticDay);
 	}
 
+	// IIFE because default display is Yesterday
 	function requestDataForYesterday(){
 		// Using Moment js library to create start and end dates for Today
 		var yesterday = moment().subtract(1, 'days');
 		var yesterdayStart = yesterday.startOf('day').toISOString();
 		var yesterdayEnd = yesterday.endOf('day').toISOString();
 		requestAndPlotCrimeData(yesterdayStart, yesterdayEnd, "Yesterday");
-	}
+	};
+	requestDataForYesterday();
 
 	// Requests new Data for Yesteday
 	$('button#trigger-yesterday').click(requestDataForYesterday);	
@@ -167,11 +169,7 @@ function CrimeDataMap(attributes){
 		var seahawksStart = lastSeahawksGame.startOf('day').toISOString();
 		var seahawksEnd = lastSeahawksGame.endOf('day').toISOString();
 		requestAndPlotCrimeData(seahawksStart, seahawksEnd, "Seahawks Game on " + lastSeahawksGame.calendar());
-	});
-
-	// Default display is Yesterday
-	requestDataForYesterday();
-	
+	});	
 }
 
 
