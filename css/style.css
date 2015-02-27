@@ -144,10 +144,15 @@ section {
 
 .data-display {
   width: 40%;
-  min-height: 500px;
+  height: 500px;
   background: #111;
   float: right;
   padding: 10px;
+}
+@media screen and (min-width: 767px) {
+  .data-display {
+    height: auto;
+  }
 }
 .data-display.show-mobile {
   display: none;
