@@ -72,6 +72,7 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -133,7 +134,11 @@ section {
   width: 60%;
   height: 500px;
   float: left;
-  margin-bottom: 40px;
+}
+@media screen and (max-width: 800px) {
+  .map {
+    width: 100%;
+  }
 }
 
 .data-display {
@@ -142,6 +147,11 @@ section {
   background: #111;
   float: right;
   padding: 10px;
+}
+@media screen and (max-width: 800px) {
+  .data-display {
+    width: 100%;
+  }
 }
 .data-display .crime-data-header {
   margin-bottom: 5px;
