@@ -1,6 +1,4 @@
-#Playing with Seattle Crime Data
-
-## (View Live)[http://mateoclarke.github.io/seattle-crime-data/]
+#Playing with Seattle Crime Data => [View Live](http://mateoclarke.github.io/seattle-crime-data/])
 
 A 24 Hour Coding Challenge from Socrata
 
