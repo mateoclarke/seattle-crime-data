@@ -26,7 +26,7 @@ body {
 
 h1 {
   font-size: 3.5em;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
   color: $black;
 
   @media (max-width: 700px) {
@@ -51,6 +51,24 @@ section {
   padding: 20px 0;
 }
 
-.artgroup {
-    @include clearfix;
-} //artgroup
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  background: rgba(237, 237, 237, 0.5);
+  border: 1px solid transparent;
+  border-radius: 0px;
+}

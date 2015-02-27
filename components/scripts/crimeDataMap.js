@@ -27,8 +27,11 @@ function CrimeDataMap(attributes){
 
 	).addTo(map);
 
+	// Set up Marker Layer
+	var markers = new L.layerGroup();
+
 	// *****
-	// Create a one mile circle centered on CLF
+	// Create a one mile circle centered on CenturyLink
 	function drawOneMileCircle(meters){
 
 		L.circle(centuryLinkCoords, meters, {color: "red", fillColor: "#FFEEBE"})
@@ -43,9 +46,10 @@ function CrimeDataMap(attributes){
 	function plotCrimeDataOnMap(data){
 		for (var i = data.length - 1; i >= 0; i--) {
 			var marker = L.marker([data[i].latitude, data[i].longitude])
-							.bindPopup(data[i].event_clearance_subgroup)
-							.addTo(map);
+						.bindPopup(data[i].event_clearance_subgroup);
+			markers.addLayer(marker);
 		};
+		map.addLayer(markers);
 	}
 
 	// Count & Update Total Crime Incidents in Request
@@ -56,8 +60,7 @@ function CrimeDataMap(attributes){
 	}
 
 	// Sort Object by converting to array
-	function sortProperties(obj)
-	{
+	function sortProperties(obj){
 	  // convert object into array
 	    var sortable=[];
 	    for(var key in obj)
@@ -72,19 +75,20 @@ function CrimeDataMap(attributes){
 	    return sortable; // array in format [ [ key1, val1 ], [ key2, val2 ], ... ]
 	}
 
-	// Count Substance Related Crimes
+	// Count Crimes by Type
 	function countCrimeTypes(data){
-		window.crimeCount = {};
+		var crimeCount = {};
 		for (var i = data.length - 1; i >= 0; i--) {
 		    crimeCount[data[i].event_clearance_subgroup] = (crimeCount[data[i].event_clearance_subgroup] || 0) + 1;
 		}
 
+		// Use sortProperties function 
 		var sortedCrimeCount = sortProperties(crimeCount);
-
+		$('.data-list').html("");
+		// Add crime types to data list, first clearing data
     	for (var i = 0; i < sortedCrimeCount.length; i++){
 		    if (sortedCrimeCount[i][1] > 1) {
-		        
-		    	$('.data-display').append("<p class='incident-type-count-"+((i%2))+"'>"+sortedCrimeCount[i][0].toLowerCase()+": <span class='crime-count-type'>"+ sortedCrimeCount[i][1]+"</span></p>");
+		    	$('.data-list').append("<p class='incident-type-count-"+((i%2))+"'>"+sortedCrimeCount[i][0].toLowerCase()+": <span class='crime-count-type'>"+ sortedCrimeCount[i][1]+"</span></p>");
 		    }
     	}
 	}
@@ -93,12 +97,16 @@ function CrimeDataMap(attributes){
 	function ajaxDataRequest(url){
 		console.log('GET', url);
 
+		// Clear existing markers before new data request
+		markers.clearLayers();
+
 		$.ajax({
 			method: 'GET',
 			url: url,
 		}).done(function(data, status) {
 			// window.socrataData = data;
 			console.log('done with call:', status, data);
+			console.log(data.length + " Records fetched.");
 			plotCrimeDataOnMap(data);
 			countTotalCrimes(data);
 		}).fail(function(xhr, status, err) {
@@ -107,23 +115,65 @@ function CrimeDataMap(attributes){
 	}
 
 	// 
-	// Bring in Crime Data
-	function requestAndPlotCrimeData(date){
+	// Bring in Crime Data with start and end times
+	function requestAndPlotCrimeData(beginDay, endDay, semanticDay){
 		// Set Up Request URL for Crime
 		var datasetUrl = "https://data.seattle.gov/resource/3k2p-39jp.json";
+		// SoQL param for 1 mile radius
 		var whereInCircleParam = "?$where=within_circle(incident_location, "+centuryLinkCoords[0]+", "+ centuryLinkCoords[1]+", "+metersInAMile+")";
-		var dateRangeParam = " and event_clearance_date>'"+date+"'";
-		var crimeDataWithMileRadiusAndDateParams = datasetUrl + whereInCircleParam + dateRangeParam;
-		var url = crimeDataWithMileRadiusAndDateParams;
+		// date range SoQL param
+		var dateRangeParam = " and event_clearance_date>'"+beginDay+"'" + " and event_clearance_date<'"+endDay+"'";
+		// FULL Concat URL
+		var url = datasetUrl + whereInCircleParam + dateRangeParam;
+		console.log('Starting Time: ' + beginDay);
+		console.log('Ending Time: ' + endDay);
 		// Make AJAX Call passing in URL
 		ajaxDataRequest(url);
+		// Update data panel day in title
+		$('#crime-date-view').text(semanticDay);
 	}
 
-	var dateStart = "2015-02-26T00:00:00";
-	requestAndPlotCrimeData(dateStart);
+	function requestDataForYesterday(){
+		// Using Moment js library to create start and end dates for Today
+		var yesterday = moment().subtract(1, 'days');
+		var yesterdayStart = yesterday.startOf('day').toISOString();
+		var yesterdayEnd = yesterday.endOf('day').toISOString();
+		requestAndPlotCrimeData(yesterdayStart, yesterdayEnd, "Yesterday");
+	}
+
+	// Requests new Data for Yesteday
+	$('button#trigger-yesterday').click(requestDataForYesterday);	
+
+	// Requests New Data for Today
+	$('button#trigger-today').click(function(){
+		// Using Moment js library to create start and end dates for Today
+		var todayStart = moment().startOf('day').toISOString();
+		var todayEnd = moment().endOf('day').toISOString();
+		requestAndPlotCrimeData(todayStart, todayEnd, "Today");
+	});
+
+	// Requests New Data for Last Sounders Home Game
+	$('button#trigger-sounders').click(function(){
+		var lastSoundersGame = moment("2014 11 30", "YYYY MM DD");
+		console.log(lastSoundersGame);
+		var soundersStart = lastSoundersGame.startOf('day').toISOString();
+		var soundersEnd = lastSoundersGame.endOf('day').toISOString();
+		requestAndPlotCrimeData(soundersStart, soundersEnd, "Sounders Game on " + lastSoundersGame.calendar());
+	});	
+
+	// Requests New Data for Last Seahawks Home Game
+	$('button#trigger-seahawks').click(function(){
+		var lastSeahawksGame = moment("2015 01 18", "YYYY MM DD");
+		var seahawksStart = lastSeahawksGame.startOf('day').toISOString();
+		var seahawksEnd = lastSeahawksGame.endOf('day').toISOString();
+		requestAndPlotCrimeData(seahawksStart, seahawksEnd, "Seahawks Game on " + lastSeahawksGame.calendar());
+	});
+
+	// Default display is Yesterday
+	requestDataForYesterday();
 	
 }
 
 
-
 var map = new CrimeDataMap('map');
+

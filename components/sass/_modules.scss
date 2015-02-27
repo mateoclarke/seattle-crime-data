@@ -4,27 +4,52 @@
   width: 60%; 
   height: $map-height; 
   float: left;
+  margin-bottom: 40px;
 } // map
 
 .data-display {
   width: 40%;
-  height: auto; 
+  height: $map-height; 
   background: $black;
   float: right;
   padding: 10px;
+  .crime-data-header {
+    margin-bottom: 5px;
+  } // .crime-data-header
   .incident-type-count-0 {
     text-transform: capitalize;
     color: $white;
     font-size: .8em;
     margin: 1px;
     span.crime-count-type {
-    text-align: right;
-    float: right;
+      text-align: right;
+      float: right;
     } //span.crime-count-type
-  } // p.incident-type-count
+  } // .incident-type-count (EVEN)
   .incident-type-count-1 {
     @extend .incident-type-count-0;
     color: $grey;
-  }
+  }// .incident-type-count-1 (ODD)
 } // data-display
 
+.view-options {
+  button {
+    width: 25%;
+    float: left;
+    display: block;
+    height: 92px;
+    &.active-btn {
+      background: $grey;
+    } // button.activ-btn
+    &:hover {
+      background: $lightGreen;
+    } // button:hover
+    p {
+      font-size: .7em;
+      margin: 0;  
+    }//p
+  } //button
+  img {
+    max-height: 60px;
+  } // img
+} // view-options
