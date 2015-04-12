@@ -1,7 +1,7 @@
-// Lat Long for CenturyLink Field
-var centuryLinkCoords = [47.595206, -122.331639];
-
 function CrimeDataMap(attributes){
+	
+	// Lat Long for CenturyLink Field
+	var centuryLinkCoords = [47.595206, -122.331639];
 
 	// our Leaflet Map
 	var map = L.map('map', {

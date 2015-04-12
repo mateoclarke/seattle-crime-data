@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h1>Seattle Police <br>911 Incident Response Data<br> within one mile of CenturyLink</h1>
-        <h2 class="tagline"></h2>
+        <h2 class="tagline">Playing with crime data in Seattle</h2>
         <a href="https://data.seattle.gov/Public-Safety/Seattle-Police-Department-911-Incident-Response/3k2p-39jp">(View Data in Socrata)</a>
     </div>
 
@@ -42,10 +42,12 @@
         <div class="data-display show-mobile">
             <h2 class="crime-data-header"><span class="crime-count"></span>Police Responses <span class="crime-date-view">Today</span></h2>
         </div>
-        <div id="map" class="map"></div>
-        <div class="data-display">
-            <h2 class="crime-data-header hide-mobile"><span class="crime-count"></span>Police Responses <span class="crime-date-view">Today</span></h2>
-            <div class="data-list"></div>
+        <div class="data-viz-wrapper">
+            <div id="map" class="map"></div>
+            <div class="data-display">
+                <h2 class="crime-data-header hide-mobile"><span class="crime-count"></span>Police Responses <span class="crime-date-view">Today</span></h2>
+                <div class="data-list"></div>
+            </div>
         </div>
     </div>
 
@@ -53,7 +55,8 @@
 
     
     <!--JAVASCRIPT LIBRARIES & SCRIPTS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script> -->
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="js/vendor/moment.js"></script>
     <script src="js/vendor/Leaflet.MakiMarkers.js"></script>

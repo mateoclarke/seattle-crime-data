@@ -11,7 +11,7 @@
 
 .data-display {
   width: 40%;
-  min-height: $map-height; 
+  // min-height: $map-height; 
   background: $black;
   float: right;
   padding: 10px;
@@ -78,3 +78,10 @@
     } // .view-options img media-query
   } // img
 } // view-options
+
+.data-viz-wrapper {
+  width: 100%;
+  display: block;
+  float: left;
+  background: $black;
+} // data-viz-wrapper

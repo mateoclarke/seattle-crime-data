@@ -8,7 +8,6 @@ var gulp = require('gulp'),
 	deploy = require('gulp-gh-pages');
 
 var jsSources = [
-	'components/scripts/tagline.js', 
 	'components/scripts/crimeDataMap.js',
 	'components/scripts/oneMileCircle.js'
 ];
